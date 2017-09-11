@@ -52,31 +52,19 @@ var hbs =  exphbs.create({
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
-// // Database configuration
-// var databaseUrl = "scraper";
-// var collections = ["scrapedData"];
-
-// Database configuration with mongoose
 mongoose.connect( process.env.MONGODB_URI ||  "mongodb://localhost/scraper");
 var db = mongoose.connection;
 
-// Show any mongoose errors
 db.on("error", function(error) {
 	console.log("Mongoose Error: ", error);
 });
 
-// Once logged in to the db through mongoose, log a success message
 
 
 // Now this has to violate a few laws, but I'll let it slide
 db.Article = require("./models/Article.js");
 db.Note = require("./models/Note.js");
 
-// Hook mongojs configuration to the db variable
-// var db = mongojs(databaseUrl, collections);
-// db.on("error", function(error) {
-// 	console.log("Database Error:", error);
-// });
 
 // Import routes and give the server access to them.
 require("./controllers/ioController.js")(app, db);
@@ -88,8 +76,5 @@ db.once("open", function() {
 		console.log("App listening on PORT " + port);
 	});
 });
-// db.scrapedData.createIndex({ "title": 1 }, { unique: true }, function () {
-
-// });
 
 

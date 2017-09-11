@@ -10,7 +10,6 @@ $("#backButton").click(function() {
 
 var viewCommentsPage = function(btn, event) {
 	event.preventDefault();
-	//console.log($(btn).attr("data-objectid"))-;
 	window.location.href = "/email/" + $(btn).attr("data-object-id");
 }
 
