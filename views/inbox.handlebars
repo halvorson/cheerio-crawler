@@ -1,0 +1,142 @@
+
+
+<div class="container-fluid">
+  <header class="row">
+    <div class="logo col-sm-2">
+      <img src="/assets/img/google.png" alt="Google">
+    </div><!-- logo -->
+
+    <div class="search-bar col-sm-6">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-main">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+      </div><!-- /input-group -->
+
+      <span class="arrow caret"></span>
+    </div><!-- search-bar -->
+
+    <div class="profile col-sm-4">
+      <ul class="profile-icons list-inline pull-right">
+        <li>Michael</li>
+        <li>
+          <span class="glyphicon glyphicon-th"></span>
+        </li>
+        <li class="bell">
+          <span class="glyphicon glyphicon-bell"></span>
+        </li>
+        <li>
+          <img src="/assets/img/headshot.jpeg" width="30px" height="30px" class="img-circle">
+        </li>
+      </ul>
+    </div><!-- profile -->
+  </header>
+
+  <div class="control-bar row">
+    <div class="menu col-sm-2">
+      Gmail
+      <span class="caret"></span>
+    </div><!-- menu -->
+
+    <div class="controls col-sm-10">
+      <ul class="control-list list-inline">
+        <li>
+          <button class="btn btn-control">
+            <input type="checkbox" class="mail-select">
+            <span class="caret"></span>
+          </button>
+        </li>
+        <li>
+          <button class="btn btn-control" id="refreshButton">
+            <span class="glyphicon glyphicon-repeat"></span>
+            {{!-- Make this button refresh the page --}}
+          </button>
+        </li>
+        <li>
+          <button class="text-btn btn btn-control">
+            <strong>More</strong>
+            <span class="caret"></span>
+          </button>
+        </li>
+      </ul>
+    </div><!-- controls -->
+  </div><!-- control-bar -->
+
+  <div class="mail row">
+    <div class="sidebar col-sm-2">
+      <button class="compose btn btn-danger">
+        Compose
+      </button>
+
+      <ul class="inbox-sections list-unstyled">
+        <li class="active">
+          Inbox (100)
+        </li>
+        <li>Sent Mail</li>
+        <li class="pending">
+          Drafts (7)
+        </li>
+        <li>All Mail</li>
+        <li class="pending">
+          Spam (1)
+        </li>
+      </ul>
+    </div><!-- sidebar -->
+
+    <div class="inbox col-sm-10">
+      <ul class="list-unstyled">
+
+        {{#each articles}}
+
+        <a href="{{this.link}}">
+          <li class="email-item row unread">
+            <div class="people col-sm-3">
+              <ul class="mail-icons list-inline">
+                <li>
+                  <input type="checkbox" class="mail-select">
+                </li>
+                <li>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                </li>
+              </ul>
+
+              <span class="people-names">
+                {{#if this.authors}}
+                {{this.authors}}
+                {{else}}
+                me
+                {{/if}}
+              </span>
+            </div><!-- people -->
+
+            <div class="message col-sm-7">
+              <div class="clipper">
+                <h3>{{this.title}}</h3>
+                -
+                <p class="viewCommentsBtn" onclick="viewCommentsPage(this,event)" data-object-id="{{this._id}}"><i class="fa fa-comments" aria-hidden="true"></i> Comments</p>
+              </div>
+            </div><!-- message -->
+
+            <div class="date col-sm-2">
+            <date class="pull-right">
+    {{!--         <button class="viewCommentsBtn btn btn-primary btn-sm" onclick="viewCommentsPage(this,event)" data-object-id="{{this._id}}">
+            Comments
+            </button> --}}
+            {{#if this.today}}
+            {{formatDateFromUnix this.publishedTime 'hh:mm a'}}
+            {{else}}
+            {{formatDateFromUnix this.publishedTime 'MMM D'}}
+            {{/if}}
+            </date>
+            </div><!-- date -->
+          </li>
+        </a>
+        {{/each}}
+      </ul>
+    </div><!-- inbox -->
+  </div><!-- mail -->
+</div>
+
